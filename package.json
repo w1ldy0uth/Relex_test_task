@@ -1,6 +1,9 @@
 {
   "name": "relex_test_task",
   "version": "1.0.0",
+  "devDependencies": {
+    "prompt-sync": "^4.2.0"
+  },
   "description": "",
   "type": "module",
   "main": "index.js",
