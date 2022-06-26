@@ -32,7 +32,7 @@ export function findMinCard(arr) {
 
 export class Player {
     constructor() {
-        this.state = "Attacker";
+        this.state = "Defender";
         this.penalties = 0;
 
         let deck = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4];
