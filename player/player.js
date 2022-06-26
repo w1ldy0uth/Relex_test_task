@@ -3,13 +3,31 @@ import {Queue} from "../queue/queue.js"
 /**
  * Fisher-Yates algorithm for shuffling the array.
  *
- * @param (array) - an array that should be shuffled.
+ * @param {array} arr - an array that should be shuffled.
  */
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1)); // random index from [0, i] range
-        [array[i], array[j]] = [array[j], array[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
+}
+
+/**
+ * Finds minimal existing card in array of cards.
+ *
+ * The main purpose of this function is to find minimal card that is not equal to -1 (beaten card).
+ *
+ * @param {array} arr - an array with defence cards.
+ *
+ * @return {number}  minimal existing defence card.
+ */
+export function findMinCard(arr) {
+    let min = arr.find(item => item !== -1);
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < min && arr[i] !== -1)
+            min = arr[i];
+    }
+    return min;
 }
 
 export class Player {
@@ -54,9 +72,3 @@ export class Player {
         return this.cards.isEmpty;
     }
 }
-
-// Tests
-
-// let player = new Player();
-// player.changeState();
-// console.log("Debugged");
