@@ -15,20 +15,26 @@ class Computer extends mod.Player {
             console.log("Computer's attacking card:", currentAttackCard);
 
             let minCard = mod.findMinCard(human.defence);
-            if (currentAttackCard < minCard) {
+            if (currentAttackCard < minCard && !(currentAttackCard === 0 && human.defence.indexOf(4, 0) !== -1)) {
                 battleResults.toDefender = currentAttackCard;
                 break;
             }
             else if (currentAttackCard === minCard) {
                 this.cards.enqueue(currentAttackCard);
             }
-            else if (currentAttackCard > minCard || (minCard === 4 && currentAttackCard === 0)) {
+            else if (currentAttackCard === 0 && human.defence.indexOf(4, 0) !== -1) {
+                human.defence[human.defence.indexOf(4, 0)] = -1;
+                battleResults.toAttacker.push(4);
+                i++;
+            }
+            else if (currentAttackCard > minCard) {
                 human.defence[human.defence.indexOf(minCard, 0)] = -1;
                 battleResults.toAttacker.push(minCard);
                 i++;
             }
         }
 
+        console.log("\nEnd of turn");
         if (human.defence.every(item => item === -1)) {
             human.penalties++;
             console.log("You got plus one penalty score. Your current penalties:", human.penalties);
@@ -38,10 +44,16 @@ class Computer extends mod.Player {
             console.log("You got new card:", battleResults.toDefender);
             human.cards.enqueue(battleResults.toDefender);
         }
-        console.log("Computer beat this your cards", battleResults.toAttacker.join(" "));
+        if (battleResults.toAttacker.length === 0) {
+            console.log("Computer haven't beat any card of yours");
+        }
+        else {
+            console.log("Computer beat this your cards:", battleResults.toAttacker.join(" "));
+        }
         for (let i = 0; i < battleResults.toAttacker.length; i++) {
             this.cards.enqueue(battleResults.toAttacker[i]);
         }
+        console.log("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-\n");
     }
 }
 
