@@ -40,7 +40,7 @@ class Computer extends mod.Player {
         }
         console.log("Computer beat this your cards", battleResults.toAttacker.join(" "));
         for (let i = 0; i < battleResults.toAttacker.length; i++) {
-                this.cards.enqueue(battleResults.toAttacker[i]);
+            this.cards.enqueue(battleResults.toAttacker[i]);
         }
     }
 }
