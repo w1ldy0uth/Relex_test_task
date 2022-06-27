@@ -1,7 +1,14 @@
 let mod = require("../player/player.js");
 
 class Computer extends mod.Player {
+    /**
+     * Method that triggers attack event (computer on human).
+     * Attack works by principle of beating card with minimal value (or 4 with 0, if possible).
+     *
+     * @param {Player} human - a real player
+     */
     attack(human) {
+        // handles battle results
         let battleResults = {
             toAttacker: [],
             toDefender: -1
@@ -14,6 +21,7 @@ class Computer extends mod.Player {
             this.cards.dequeue();
             console.log("Computer's attacking card:", currentAttackCard);
 
+            // gets minimal card and compares it to current first card in queue
             let minCard = mod.findMinCard(human.defence);
             if (currentAttackCard < minCard && !(currentAttackCard === 0 && human.defence.indexOf(4, 0) !== -1)) {
                 battleResults.toDefender = currentAttackCard;
@@ -22,6 +30,7 @@ class Computer extends mod.Player {
             else if (currentAttackCard === minCard) {
                 this.cards.enqueue(currentAttackCard);
             }
+            // possible attack "4 with 0"
             else if (currentAttackCard === 0 && human.defence.indexOf(4, 0) !== -1) {
                 human.defence[human.defence.indexOf(4, 0)] = -1;
                 battleResults.toAttacker.push(4);
