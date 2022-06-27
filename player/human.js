@@ -1,9 +1,17 @@
 let mod = require("../player/player.js");
 
+// to get input from user's CLI
 const readline = require("prompt-sync")();
 
 class Human extends mod.Player {
+    /**
+     * Method that triggers attack event (human on computer).
+     * Attack works by principle of choosing the card that real player wants to try to beat.
+     *
+     * @param {Player} computer - an AI player
+     */
     attack(computer) {
+        // handles battle results
         let battleResults = {
             toAttacker: [],
             toDefender: -1
@@ -19,6 +27,7 @@ class Human extends mod.Player {
             let cardToBeat = readline("Choose a computer's card to beat: ");
             cardToBeat = parseInt(cardToBeat);
 
+            // if attack choice of user is not presented in defence of AI
             if (cardToBeat === -1 || computer.defence.indexOf(cardToBeat, 0) === -1) {
                 console.log("Wrong card picked, try one again");
             }
