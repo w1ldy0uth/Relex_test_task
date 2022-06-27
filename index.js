@@ -1,5 +1,5 @@
-import {Computer} from "./player/computer.js";
-import {Human} from "./player/human.js";
+let modComputer = require("./player/computer.js");
+let modHuman = require("./player/human.js");
 
 function getRandom(arr) {
     return arr[Math.floor((Math.random() * arr.length))];
@@ -11,8 +11,8 @@ function checkLose(player) {
 }
 
 function main() {
-    let computer = new Computer();
-    let human = new Human();
+    let computer = new modComputer.Computer();
+    let human = new modHuman.Human();
 
     console.log("Welcome to the card game \"Wall to wall\"!", "\nPicking first attacker by random...");
     let turn = getRandom(["human", "computer"]);
