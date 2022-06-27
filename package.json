@@ -7,7 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node ./tests/queue.test.js && node ./tests/player.test.js"
+    "test": "node ./tests/queue.test.js && node ./tests/player.test.js && node ./tests/computer.test.js && node ./tests/human.test.js"
   },
   "keywords": [],
   "author": "w1ldy0uth",
