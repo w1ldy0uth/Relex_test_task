@@ -6,7 +6,7 @@ function getRandom(arr) {
 }
 
 function checkLose(player) {
-    const maxPenalties = 6;
+    const maxPenalties = 3;
     return player.hasNoCards() || player.penalties === maxPenalties;
 }
 
@@ -14,27 +14,30 @@ function main() {
     let computer = new modComputer.Computer();
     let human = new modHuman.Human();
 
-    console.log("Welcome to the card game \"Wall to wall\"!", "\nPicking first attacker by random...");
+    console.log("Welcome to the card game \"Wall to wall\"!", "\n\nPicking first attacker by random...");
     let turn = getRandom(["human", "computer"]);
 
     if (turn === "human") {
         human.changeState();
+        console.log("The first turn is up to human\n");
+
     }
     else {
         computer.changeState();
+        console.log("The first turn is up to computer\n");
     }
 
     while (true) {
         if (human.state === "Attacker") {
             human.attack(computer);
-            human.changeState();
-            computer.changeState();
         }
         else if (computer.state === "Attacker") {
             computer.attack(human);
-            computer.changeState();
-            human.changeState();
         }
+        computer.changeState();
+        computer.refreshDefence();
+        human.changeState();
+        human.refreshDefence();
 
         if (checkLose(human)) {
             console.log("You've lost. Try again.");
