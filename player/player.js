@@ -1,5 +1,4 @@
-import {Queue} from "../queue/queue.js"
-
+let mod = require("../queue/queue.js");
 /**
  * Fisher-Yates algorithm for shuffling the array.
  *
@@ -21,7 +20,7 @@ function shuffle(arr) {
  *
  * @return {number}  minimal existing defence card.
  */
-export function findMinCard(arr) {
+function findMinCard(arr) {
     let min = arr.find(item => item !== -1);
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] < min && arr[i] !== -1)
@@ -30,14 +29,14 @@ export function findMinCard(arr) {
     return min;
 }
 
-export class Player {
+class Player {
     constructor() {
         this.state = "Defender";
         this.penalties = 0;
 
         let deck = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4];
         shuffle(deck);
-        this.cards = new Queue();
+        this.cards = new mod.Queue();
         for (let item of deck) {
             this.cards.enqueue(item);
         }
@@ -72,3 +71,8 @@ export class Player {
         return this.cards.isEmpty;
     }
 }
+
+module.exports = {
+    findMinCard,
+    Player
+};
