@@ -1,15 +1,29 @@
 let modComputer = require("./player/computer.js");
 let modHuman = require("./player/human.js");
 
+/**
+ * Gets random value from specified array.
+ *
+ * @param {array} arr - an array with any items
+ */
 function getRandom(arr) {
     return arr[Math.floor((Math.random() * arr.length))];
 }
 
+/**
+ * Checks if specified player cannot proceed playing.
+ *
+ * @param {modHuman.Human | modComputer.Computer} player - a player that is meant to be checked
+ */
 function checkLose(player) {
     const maxPenalties = 3;
     return player.hasNoCards() || player.penalties === maxPenalties;
 }
 
+/**
+ * Main game loop.
+ * Creates the classes of player and AI, determines who will attack first and runs the loop with attacks.
+ */
 function main() {
     let computer = new modComputer.Computer();
     let human = new modHuman.Human();
@@ -49,5 +63,7 @@ function main() {
         }
     }
 }
+
+// DRIVER CODE SECTION
 
 main();
