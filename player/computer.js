@@ -1,6 +1,6 @@
-import {Player, findMinCard} from "./player.js";
+let mod = require("../player/player.js");
 
-export class Computer extends Player {
+class Computer extends mod.Player {
     attack(human) {
         let battleResults = {
             toAttacker: [],
@@ -15,7 +15,7 @@ export class Computer extends Player {
             this.cards.dequeue();
             console.log("Computer's attacking card is ", currentAttackCard);
 
-            let minCard = findMinCard(human.defence);
+            let minCard = mod.findMinCard(human.defence);
             if (currentAttackCard < minCard) {
                 battleResults.toDefender = currentAttackCard;
                 break;
@@ -44,3 +44,7 @@ export class Computer extends Player {
         }
     }
 }
+
+module.exports = {
+    Computer
+};
