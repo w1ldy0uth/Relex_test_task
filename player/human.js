@@ -1,8 +1,8 @@
-import {findMinCard, Player} from "./player.js";
+let mod = require("../player/player.js");
 
 const readline = require("prompt-sync")();
 
-export class Human extends Player {
+class Human extends mod.Player {
     attack(computer) {
         let battleResults = {
             toAttacker: [],
@@ -17,7 +17,7 @@ export class Human extends Player {
             this.cards.dequeue();
             console.log("Your attacking card is ", currentAttackCard);
 
-            if (currentAttackCard < findMinCard(computer.defence)) {
+            if (currentAttackCard < mod.findMinCard(computer.defence)) {
                 console.log(currentAttackCard, " isn't strong enough to beat computer's defence, end of stroke.");
                 battleResults.toDefender = currentAttackCard;
                 break;
@@ -49,3 +49,7 @@ export class Human extends Player {
         }
     }
 }
+
+module.exports = {
+    Human
+};
