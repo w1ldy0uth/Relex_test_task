@@ -1,6 +1,6 @@
-import {Queue} from "../queue/queue.js"
+let mod = require("../queue/queue.js");
 
-let queue = new Queue();
+let queue = new mod.Queue();
 
 if (queue === undefined) {
     throw new Error("Queue isn't creating right");
